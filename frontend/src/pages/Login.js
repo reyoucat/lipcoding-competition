@@ -119,13 +119,13 @@ const Login = () => {
                     <div className="text-xs">
                       <div className="font-medium text-foreground">멘토 계정</div>
                       <div className="text-muted-foreground">mentor@test.com</div>
-                      <div className="text-muted-foreground">password123</div>
+                      <div className="text-muted-foreground">TestPassword123!</div>
                     </div>
                     <Button
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => fillTestAccount('mentor@test.com', 'password123')}
+                      onClick={() => fillTestAccount('mentor@test.com', 'TestPassword123!')}
                       className="text-xs px-3 py-1"
                     >
                       자동입력
@@ -137,13 +137,13 @@ const Login = () => {
                     <div className="text-xs">
                       <div className="font-medium text-foreground">멘티 계정</div>
                       <div className="text-muted-foreground">mentee@test.com</div>
-                      <div className="text-muted-foreground">password123</div>
+                      <div className="text-muted-foreground">TestPassword123!</div>
                     </div>
                     <Button
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => fillTestAccount('mentee@test.com', 'password123')}
+                      onClick={() => fillTestAccount('mentee@test.com', 'TestPassword123!')}
                       className="text-xs px-3 py-1"
                     >
                       자동입력

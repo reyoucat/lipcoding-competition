@@ -18,6 +18,10 @@
 cd backend && npm install && npm start & cd ../frontend && npm install && npm start &
 ```
 
+**제출용 명령어 (워크플로우 호환):**
+- 백엔드: `npm install && npm start &`
+- 프론트엔드: `npm install && npm start &`
+
 ### 1. 백엔드 실행
 
 ```bash
@@ -98,6 +102,13 @@ npm start &
 ## 데이터베이스
 
 SQLite를 사용하며, 애플리케이션 시작 시 자동으로 테이블이 생성됩니다.
+
+### 테스트 계정
+
+개발 및 테스트를 위한 기본 계정이 자동으로 생성됩니다:
+
+- **멘토 계정**: `mentor@test.com` / `TestPassword123!`
+- **멘티 계정**: `mentee@test.com` / `TestPassword123!`
 
 ### 테이블 구조
 

@@ -6,6 +6,9 @@
 # dotenv files
 .env
 
+# Workflow reference file (for analysis only)
+workflow_action
+
 # User-specific files
 *.rsuser
 *.suo

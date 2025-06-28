@@ -88,7 +88,7 @@ const createDefaultAccounts = async () => {
     const menteeExists = await dbHelpers.getUserByEmail('mentee@test.com');
 
     if (!mentorExists) {
-      const hashedPassword = await bcrypt.hash('password123', 10);
+      const hashedPassword = await bcrypt.hash('TestPassword123!', 10);
       // Use direct database insertion to avoid double hashing
       await new Promise((resolve, reject) => {
         db.run(
@@ -107,11 +107,11 @@ const createDefaultAccounts = async () => {
         bio: '5년차 풀스택 개발자입니다. React, Node.js 전문가로 멘티를 도와드리겠습니다.',
         skills: ['React', 'Node.js', 'TypeScript', 'JavaScript', 'AWS']
       });
-      console.log('Default mentor account created: mentor@test.com / password123');
+      console.log('Default mentor account created: mentor@test.com / TestPassword123!');
     }
 
     if (!menteeExists) {
-      const hashedPassword = await bcrypt.hash('password123', 10);
+      const hashedPassword = await bcrypt.hash('TestPassword123!', 10);
       // Use direct database insertion to avoid double hashing
       await new Promise((resolve, reject) => {
         db.run(
@@ -129,7 +129,7 @@ const createDefaultAccounts = async () => {
       await dbHelpers.updateUserProfile(mentee.id, {
         bio: 'React를 배우고 싶은 신입 개발자입니다. 멘토링을 통해 성장하고 싶습니다.'
       });
-      console.log('Default mentee account created: mentee@test.com / password123');
+      console.log('Default mentee account created: mentee@test.com / TestPassword123!');
     }
   } catch (error) {
     console.error('Error creating default accounts:', error);
