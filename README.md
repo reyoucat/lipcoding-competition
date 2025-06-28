@@ -5,17 +5,23 @@
 ## 프로젝트 구조
 
 ```
-application/
 ├── backend/          # Node.js + Express 백엔드 API
 └── frontend/         # React 프론트엔드
 ```
 
 ## 실행 방법
 
+### 빠른 실행 (루트에서 한번에)
+
+```bash
+# 백엔드와 프론트엔드 동시 실행
+cd backend && npm install && npm start & cd ../frontend && npm install && npm start &
+```
+
 ### 1. 백엔드 실행
 
 ```bash
-cd application/backend
+cd backend
 npm install
 npm start &
 ```
@@ -29,7 +35,7 @@ npm start &
 새 터미널에서:
 
 ```bash
-cd application/frontend
+cd frontend
 npm install
 npm start &
 ```
@@ -119,10 +125,10 @@ SQLite를 사용하며, 애플리케이션 시작 시 자동으로 테이블이 
 
 ```bash
 # 백엔드
-cd application/backend
+cd backend
 npm run dev &
 
 # 프론트엔드
-cd application/frontend
+cd frontend
 npm start &
 ```
