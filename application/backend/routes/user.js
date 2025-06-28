@@ -96,15 +96,26 @@ router.get('/me', authenticateToken, async (req, res) => {
       profile: {
         name: user.name,
         bio: user.bio || '',
-        imageUrl: user.image_data ? `/images/${user.role}/${user.id}` : `https://placehold.co/500x500.jpg?text=${user.role.toUpperCase()}`
+        imageUrl: user.image_data ? `/images/${user.role}/${user.id}` : `https://placehold.co/500x500.jpg?text=${user.role.toUpperCase()}`,
+        skills: [] // Initialize skills as empty array for all users
       }
     };
 
     // Add skills for mentors
     if (user.role === 'mentor' && user.skills) {
       try {
-        userProfile.profile.skills = JSON.parse(user.skills);
+        console.log('Raw skills data:', user.skills);
+        console.log('Type of skills data:', typeof user.skills);
+        
+        // Check if it's already an array (parsed)
+        if (Array.isArray(user.skills)) {
+          userProfile.profile.skills = user.skills;
+        } else {
+          // Try to parse JSON string
+          userProfile.profile.skills = JSON.parse(user.skills);
+        }
       } catch (e) {
+        console.error('Error parsing skills:', e);
         userProfile.profile.skills = [];
       }
     }

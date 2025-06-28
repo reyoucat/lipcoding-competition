@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
@@ -10,15 +10,26 @@ import { Badge } from '../components/ui/badge';
 const Profile = () => {
   const { user, updateProfile, uploadImage } = useAuth();
   const [formData, setFormData] = useState({
-    name: user?.profile?.name || '',
-    bio: user?.profile?.bio || '',
-    skills: user?.profile?.skills || []
+    name: '',
+    bio: '',
+    skills: []
   });
   const [newSkill, setNewSkill] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [imageUploading, setImageUploading] = useState(false);
   const fileInputRef = useRef(null);
+
+  // Update formData when user data loads
+  useEffect(() => {
+    if (user?.profile) {
+      setFormData({
+        name: user.profile.name || '',
+        bio: user.profile.bio || '',
+        skills: Array.isArray(user.profile.skills) ? user.profile.skills : []
+      });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     setFormData({

@@ -177,7 +177,7 @@ const MentorList = () => {
                   <div>
                     <Label className="text-sm font-medium text-gray-700">기술 스택</Label>
                     <div className="flex flex-wrap gap-1 mt-2">
-                      {mentor.skills.length > 0 ? (
+                      {Array.isArray(mentor.skills) && mentor.skills.length > 0 ? (
                         mentor.skills.map((skill, index) => (
                           <Badge key={index} variant="secondary">
                             {skill}

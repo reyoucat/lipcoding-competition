@@ -40,6 +40,14 @@ const Login = () => {
     setLoading(false);
   };
 
+  const fillTestAccount = (email, password) => {
+    setFormData({
+      email: email,
+      password: password
+    });
+    setError(''); // 기존 에러 메시지 클리어
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -103,15 +111,48 @@ const Login = () => {
             {/* 테스트용 계정 안내 */}
             <Card className="bg-muted/50">
               <CardContent className="pt-6">
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <h4 className="text-sm font-medium">테스트용 계정</h4>
-                  <div className="text-xs space-y-1 text-muted-foreground">
-                    <p><span className="font-medium">멘토:</span> mentor@test.com / password123</p>
-                    <p><span className="font-medium">멘티:</span> mentee@test.com / password123</p>
-                    <p className="text-xs mt-2">
-                      ※ 위 계정이 없으면 회원가입 후 이용하세요
-                    </p>
+                  
+                  {/* 멘토 계정 */}
+                  <div className="flex items-center justify-between p-2 bg-background rounded border">
+                    <div className="text-xs">
+                      <div className="font-medium text-foreground">멘토 계정</div>
+                      <div className="text-muted-foreground">mentor@test.com</div>
+                      <div className="text-muted-foreground">password123</div>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => fillTestAccount('mentor@test.com', 'password123')}
+                      className="text-xs px-3 py-1"
+                    >
+                      자동입력
+                    </Button>
                   </div>
+
+                  {/* 멘티 계정 */}
+                  <div className="flex items-center justify-between p-2 bg-background rounded border">
+                    <div className="text-xs">
+                      <div className="font-medium text-foreground">멘티 계정</div>
+                      <div className="text-muted-foreground">mentee@test.com</div>
+                      <div className="text-muted-foreground">password123</div>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => fillTestAccount('mentee@test.com', 'password123')}
+                      className="text-xs px-3 py-1"
+                    >
+                      자동입력
+                    </Button>
+                  </div>
+
+                  <p className="text-xs text-muted-foreground mt-2">
+                    ※ 자동입력 후 로그인 버튼을 누르세요
+                  </p>
                 </div>
               </CardContent>
             </Card>

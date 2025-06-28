@@ -89,7 +89,17 @@ const createDefaultAccounts = async () => {
 
     if (!mentorExists) {
       const hashedPassword = await bcrypt.hash('password123', 10);
-      await dbHelpers.createUser('mentor@test.com', hashedPassword, '김멘토', 'mentor');
+      // Use direct database insertion to avoid double hashing
+      await new Promise((resolve, reject) => {
+        db.run(
+          'INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)',
+          ['mentor@test.com', hashedPassword, '김멘토', 'mentor'],
+          function(err) {
+            if (err) reject(err);
+            else resolve(this.lastID);
+          }
+        );
+      });
       
       // Add mentor profile with skills
       const mentor = await dbHelpers.getUserByEmail('mentor@test.com');
@@ -102,7 +112,17 @@ const createDefaultAccounts = async () => {
 
     if (!menteeExists) {
       const hashedPassword = await bcrypt.hash('password123', 10);
-      await dbHelpers.createUser('mentee@test.com', hashedPassword, '김멘티', 'mentee');
+      // Use direct database insertion to avoid double hashing
+      await new Promise((resolve, reject) => {
+        db.run(
+          'INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)',
+          ['mentee@test.com', hashedPassword, '김멘티', 'mentee'],
+          function(err) {
+            if (err) reject(err);
+            else resolve(this.lastID);
+          }
+        );
+      });
       
       // Add mentee profile
       const mentee = await dbHelpers.getUserByEmail('mentee@test.com');
