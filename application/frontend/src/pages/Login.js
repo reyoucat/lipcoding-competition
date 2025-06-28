@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -37,70 +41,82 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="card" style={{ maxWidth: '400px', margin: '100px auto' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>로그인</h2>
-        
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">이메일</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="form-control"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <Card>
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-2xl text-center">로그인</CardTitle>
+            <CardDescription className="text-center">
+              계정에 로그인하여 멘토-멘티 매칭을 시작하세요
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">이메일</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="name@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="password">비밀번호</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="form-control"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">비밀번호</Label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="비밀번호를 입력하세요"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-          {error && <div className="error">{error}</div>}
+              {error && (
+                <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md">
+                  {error}
+                </div>
+              )}
 
-          <button 
-            type="submit" 
-            className="btn btn-primary" 
-            style={{ width: '100%' }}
-            disabled={loading}
-          >
-            {loading ? '로그인 중...' : '로그인'}
-          </button>
-        </form>
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={loading}
+              >
+                {loading ? '로그인 중...' : '로그인'}
+              </Button>
+            </form>
 
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          <p>
-            계정이 없으신가요? <Link to="/signup">회원가입</Link>
-          </p>
-        </div>
+            <div className="text-center text-sm">
+              <span className="text-muted-foreground">계정이 없으신가요? </span>
+              <Link to="/signup" className="text-primary hover:underline">
+                회원가입
+              </Link>
+            </div>
 
-        {/* 테스트용 계정 안내 */}
-        <div style={{ 
-          marginTop: '30px', 
-          padding: '16px', 
-          backgroundColor: '#f8f9fa', 
-          borderRadius: '6px',
-          fontSize: '14px'
-        }}>
-          <h4 style={{ marginBottom: '12px', fontSize: '16px' }}>테스트용 계정:</h4>
-          <p style={{ margin: '4px 0' }}><strong>멘토:</strong> mentor@test.com / password123</p>
-          <p style={{ margin: '4px 0' }}><strong>멘티:</strong> mentee@test.com / password123</p>
-          <p style={{ margin: '8px 0 0 0', color: '#666' }}>
-            ※ 위 계정이 없으면 회원가입 후 이용하세요
-          </p>
-        </div>
+            {/* 테스트용 계정 안내 */}
+            <Card className="bg-muted/50">
+              <CardContent className="pt-6">
+                <div className="space-y-2">
+                  <h4 className="text-sm font-medium">테스트용 계정</h4>
+                  <div className="text-xs space-y-1 text-muted-foreground">
+                    <p><span className="font-medium">멘토:</span> mentor@test.com / password123</p>
+                    <p><span className="font-medium">멘티:</span> mentee@test.com / password123</p>
+                    <p className="text-xs mt-2">
+                      ※ 위 계정이 없으면 회원가입 후 이용하세요
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

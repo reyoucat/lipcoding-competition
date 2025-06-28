@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Select } from '../components/ui/select';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -39,86 +44,98 @@ const Signup = () => {
   };
 
   return (
-    <div className="container">
-      <div className="card" style={{ maxWidth: '400px', margin: '100px auto' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>회원가입</h2>
-        
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">이메일</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="form-control"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <Card>
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-2xl text-center">회원가입</CardTitle>
+            <CardDescription className="text-center">
+              새 계정을 만들어 멘토-멘티 매칭을 시작하세요
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">이메일</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="name@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="password">비밀번호 (6자 이상)</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="form-control"
-              value={formData.password}
-              onChange={handleChange}
-              minLength="6"
-              required
-            />
-          </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">비밀번호 (6자 이상)</Label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="비밀번호를 입력하세요"
+                  value={formData.password}
+                  onChange={handleChange}
+                  minLength={6}
+                  required
+                />
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="name">이름</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="form-control"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
+              <div className="space-y-2">
+                <Label htmlFor="name">이름</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="이름을 입력하세요"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="role">역할</label>
-            <select
-              id="role"
-              name="role"
-              className="form-control"
-              value={formData.role}
-              onChange={handleChange}
-              required
-            >
-              <option value="mentee">멘티</option>
-              <option value="mentor">멘토</option>
-            </select>
-          </div>
+              <div className="space-y-2">
+                <Label htmlFor="role">역할</Label>
+                <Select
+                  id="role"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="mentee">멘티</option>
+                  <option value="mentor">멘토</option>
+                </Select>
+              </div>
 
-          {error && <div className="error">{error}</div>}
+              {error && (
+                <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md">
+                  {error}
+                </div>
+              )}
 
-          <button 
-            type="submit" 
-            className="btn btn-primary" 
-            style={{ width: '100%' }}
-            disabled={loading}
-          >
-            {loading ? '가입 중...' : '회원가입'}
-          </button>
-        </form>
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={loading}
+              >
+                {loading ? '계정 생성 중...' : '회원가입'}
+              </Button>
+            </form>
 
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          <p>
-            이미 계정이 있으신가요? <Link to="/login">로그인</Link>
-          </p>
-        </div>
+            <div className="text-center text-sm">
+              <span className="text-muted-foreground">이미 계정이 있으신가요? </span>
+              <Link to="/login" className="text-primary hover:underline">
+                로그인
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
 };
 
 export default Signup;
+

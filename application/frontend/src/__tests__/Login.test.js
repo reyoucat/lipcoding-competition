@@ -34,7 +34,7 @@ describe('Login Component', () => {
   test('displays test accounts information', () => {
     render(<MockedLogin />);
     
-    expect(screen.getByText('테스트용 계정:')).toBeInTheDocument();
+    expect(screen.getByText('테스트용 계정')).toBeInTheDocument();
     expect(screen.getByText(/mentor@test.com/)).toBeInTheDocument();
     expect(screen.getByText(/mentee@test.com/)).toBeInTheDocument();
   });
