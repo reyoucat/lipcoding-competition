@@ -482,3 +482,23 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Project specific ignores
+# Database files (auto-generated)
+application/backend/database/database.sqlite
+application/backend/database/*.sqlite
+application/backend/database/*.db
+
+# Test coverage reports (auto-generated)
+application/frontend/coverage/
+**/coverage/
+coverage/
+
+# Frontend build artifacts
+application/frontend/build/
+**/build/
+
+# Runtime logs
+application/backend/logs/
+application/frontend/logs/
+*.log
