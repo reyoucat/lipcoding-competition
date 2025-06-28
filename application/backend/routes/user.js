@@ -296,7 +296,7 @@ router.get('/images/:role/:id', async (req, res) => {
 
     if (!user.image_data) {
       // Return default local image
-      return res.redirect(`/public/images/default-${role}.png`);
+      return res.redirect(`/images/default-${role}.png`);
     }
 
     res.set('Content-Type', user.image_type);

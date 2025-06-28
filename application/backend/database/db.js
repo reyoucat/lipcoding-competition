@@ -105,7 +105,7 @@ const createDefaultAccounts = async () => {
       const mentor = await dbHelpers.getUserByEmail('mentor@test.com');
       await dbHelpers.updateUserProfile(mentor.id, {
         bio: '5년차 풀스택 개발자입니다. React, Node.js 전문가로 멘티를 도와드리겠습니다.',
-        skills: JSON.stringify(['React', 'Node.js', 'TypeScript', 'JavaScript', 'AWS'])
+        skills: ['React', 'Node.js', 'TypeScript', 'JavaScript', 'AWS']
       });
       console.log('Default mentor account created: mentor@test.com / password123');
     }

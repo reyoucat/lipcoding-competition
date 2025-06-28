@@ -75,30 +75,41 @@ router.get('/mentors', authenticateToken, requireRole('mentee'), async (req, res
     
     // Transform mentor data
     mentors = mentors.map(mentor => {
+      let skills = [];
+      
+      // Parse skills safely
+      if (mentor.skills) {
+        try {
+          console.log('Raw skills data:', mentor.skills);
+          console.log('Type of skills data:', typeof mentor.skills);
+          const parsedSkills = typeof mentor.skills === 'string' 
+            ? JSON.parse(mentor.skills) 
+            : mentor.skills;
+          console.log('Parsed skills:', parsedSkills);
+          skills = Array.isArray(parsedSkills) ? parsedSkills : [];
+          console.log('Final skills after assignment:', skills);
+        } catch (e) {
+          console.error('Failed to parse skills:', e);
+          skills = [];
+        }
+      }
+      
       const mentorData = {
         id: mentor.id,
         name: mentor.name,
         bio: mentor.bio || '',
-        imageUrl: mentor.image_data ? `/images/mentor/${mentor.id}` : '/public/images/default-mentor.png',
-        skills: []
+        imageUrl: mentor.image_data ? `/images/mentor/${mentor.id}` : '/images/default-mentor.png',
+        skills: skills
       };
       
-      // Parse skills
-      if (mentor.skills) {
-        try {
-          mentorData.skills = JSON.parse(mentor.skills);
-        } catch (e) {
-          mentorData.skills = [];
-        }
-      }
-      
+      console.log('mentorData.skills before return:', mentorData.skills);
       return mentorData;
     });
     
     // Filter by skill if provided
     if (skill) {
       mentors = mentors.filter(mentor => 
-        mentor.skills.some(s => s.toLowerCase().includes(skill.toLowerCase()))
+        Array.isArray(mentor.skills) && mentor.skills.some(s => s.toLowerCase().includes(skill.toLowerCase()))
       );
     }
     

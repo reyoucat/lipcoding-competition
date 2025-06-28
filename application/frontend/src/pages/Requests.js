@@ -155,11 +155,21 @@ const Requests = () => {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-2">멘토 기술 스택:</h4>
                       <div className="flex flex-wrap gap-2">
-                        {JSON.parse(request.mentor_skills || '[]').map((skill, index) => (
-                          <Badge key={index} variant="outline">
-                            {skill}
-                          </Badge>
-                        ))}
+                        {(() => {
+                          try {
+                            const skills = typeof request.mentor_skills === 'string' 
+                              ? JSON.parse(request.mentor_skills || '[]')
+                              : request.mentor_skills || [];
+                            return skills.map((skill, index) => (
+                              <Badge key={index} variant="outline">
+                                {skill}
+                              </Badge>
+                            ));
+                          } catch (e) {
+                            console.error('Failed to parse mentor skills:', e);
+                            return <span className="text-gray-500">기술 스택 정보를 불러올 수 없습니다.</span>;
+                          }
+                        })()}
                       </div>
                     </div>
                   )}
