@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
@@ -23,18 +23,14 @@ const MentorList = () => {
   const [requestingMentor, setRequestingMentor] = useState(null);
   const [requestMessage, setRequestMessage] = useState('');
 
-  useEffect(() => {
-    fetchMentors();
-  }, [filters]);
-
-  const fetchMentors = async () => {
+  const fetchMentors = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams();
       if (filters.skill) params.append('skill', filters.skill);
       params.append('sortBy', filters.sortBy);
       params.append('sortOrder', filters.sortOrder);
-
+      
       const response = await axios.get(`/api/mentors?${params}`);
       setMentors(response.data);
       setError('');
@@ -44,7 +40,11 @@ const MentorList = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    fetchMentors();
+  }, [fetchMentors]);
 
   const handleFilterChange = (e) => {
     setFilters({

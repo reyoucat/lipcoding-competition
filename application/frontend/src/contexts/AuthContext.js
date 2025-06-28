@@ -15,6 +15,18 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const fetchUserProfile = React.useCallback(async () => {
+    try {
+      const response = await axios.get('/api/me');
+      setUser(response.data);
+    } catch (error) {
+      console.error('Failed to fetch user profile:', error);
+      logout();
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   // Set up axios interceptors
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -39,19 +51,7 @@ export const AuthProvider = ({ children }) => {
     return () => {
       axios.interceptors.response.eject(responseInterceptor);
     };
-  }, []);
-
-  const fetchUserProfile = async () => {
-    try {
-      const response = await axios.get('/api/me');
-      setUser(response.data);
-    } catch (error) {
-      console.error('Failed to fetch user profile:', error);
-      logout();
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [fetchUserProfile]);
 
   const login = async (email, password) => {
     try {
