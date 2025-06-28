@@ -38,7 +38,7 @@ describe('Matching API', () => {
     const mentorResponse = await request(app)
       .post('/api/signup')
       .send({
-        email: 'mentor@test.com',
+        email: 'testmentor@example.com',
         password: 'password123',
         name: 'Test Mentor',
         role: 'mentor'
@@ -53,7 +53,7 @@ describe('Matching API', () => {
     const menteeResponse = await request(app)
       .post('/api/signup')
       .send({
-        email: 'mentee@test.com',
+        email: 'testmentee@example.com',
         password: 'password123',
         name: 'Test Mentee',
         role: 'mentee'
@@ -72,7 +72,7 @@ describe('Matching API', () => {
     const mentorLogin = await request(app)
       .post('/api/login')
       .send({
-        email: 'mentor@test.com',
+        email: 'testmentor@example.com',
         password: 'password123'
       });
     
@@ -95,7 +95,7 @@ describe('Matching API', () => {
     const menteeLogin = await request(app)
       .post('/api/login')
       .send({
-        email: 'mentee@test.com',
+        email: 'testmentee@example.com',
         password: 'password123'
       });
     
