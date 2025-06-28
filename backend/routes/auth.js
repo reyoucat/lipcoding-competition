@@ -126,17 +126,20 @@ router.post('/signup', [
  *       500:
  *         description: Internal server error
  */
-router.post('/login', [
-  body('email').isEmail().normalizeEmail(),
-  body('password').notEmpty()
-], async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
+    const { email, password } = req.body;
+
+    // Check if required fields are present
+    if (!email || !password) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const { email, password } = req.body;
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
 
     // Get user by email
     const user = await getUserByEmail(email);
