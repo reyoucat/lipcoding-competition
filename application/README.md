@@ -17,7 +17,7 @@ application/
 ```bash
 cd application/backend
 npm install
-npm start
+npm start &
 ```
 
 백엔드는 `http://localhost:8080`에서 실행됩니다.
@@ -31,7 +31,7 @@ npm start
 ```bash
 cd application/frontend
 npm install
-npm start
+npm start &
 ```
 
 프론트엔드는 `http://localhost:3000`에서 실행됩니다.
@@ -120,9 +120,9 @@ SQLite를 사용하며, 애플리케이션 시작 시 자동으로 테이블이 
 ```bash
 # 백엔드
 cd application/backend
-npm run dev
+npm run dev &
 
 # 프론트엔드
 cd application/frontend
-npm start
+npm start &
 ```

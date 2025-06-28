@@ -79,7 +79,7 @@ router.get('/mentors', authenticateToken, requireRole('mentee'), async (req, res
         id: mentor.id,
         name: mentor.name,
         bio: mentor.bio || '',
-        imageUrl: mentor.image_data ? `/images/mentor/${mentor.id}` : 'https://placehold.co/500x500.jpg?text=MENTOR',
+        imageUrl: mentor.image_data ? `/images/mentor/${mentor.id}` : '/public/images/default-mentor.png',
         skills: []
       };
       

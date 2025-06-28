@@ -96,7 +96,7 @@ router.get('/me', authenticateToken, async (req, res) => {
       profile: {
         name: user.name,
         bio: user.bio || '',
-        imageUrl: user.image_data ? `/images/${user.role}/${user.id}` : `https://placehold.co/500x500.jpg?text=${user.role.toUpperCase()}`,
+        imageUrl: user.image_data ? `/images/${user.role}/${user.id}` : `/public/images/default-${user.role}.png`,
         skills: [] // Initialize skills as empty array for all users
       }
     };
@@ -295,8 +295,8 @@ router.get('/images/:role/:id', async (req, res) => {
     }
 
     if (!user.image_data) {
-      // Return default image URL
-      return res.redirect(`https://placehold.co/500x500.jpg?text=${role.toUpperCase()}`);
+      // Return default local image
+      return res.redirect(`/public/images/default-${role}.png`);
     }
 
     res.set('Content-Type', user.image_type);
