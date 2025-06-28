@@ -135,8 +135,8 @@ body:
   id: swagger_ui_url
   attributes:
     label: 'Swagger UI URL'
-    description: 'Swagger UI URL을 입력해 주세요. (예: `http://localhost:8080/swagger-ui`)'
-    placeholder: 'Swagger UI URL을 입력해 주세요. (예: http://localhost:8080/swagger-ui)'
+    description: 'Swagger UI 상대 경로를 입력해 주세요. (예: `swagger-ui`)'
+    placeholder: 'Swagger UI 상대 경로를 입력해 주세요. (예: swagger-ui)'
   validations:
     required: true
 
@@ -144,7 +144,7 @@ body:
   id: openapi_doc_url
   attributes:
     label: 'OpenAPI 문서 URL'
-    description: 'OpenAPI 문서 URL을 입력해 주세요. (예: `http://localhost:8080/v3/api-docs`)'
-    placeholder: 'OpenAPI 문서 URL을 입력해 주세요. (예: http://localhost:8080/v3/api-docs)'
+    description: 'OpenAPI 문서 상대 경로를 입력해 주세요. (예: `openapi.json`)'
+    placeholder: 'OpenAPI 문서 상대 경로를 입력해 주세요. (예: openapi.json)'
   validations:
     required: true

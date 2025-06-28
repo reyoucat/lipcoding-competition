@@ -42,12 +42,12 @@ describe('Signup Component', () => {
     const roleSelect = screen.getByLabelText('역할');
     
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+    fireEvent.change(passwordInput, { target: { value: 'TestPassword123!' } });
     fireEvent.change(nameInput, { target: { value: 'Test User' } });
     fireEvent.change(roleSelect, { target: { value: 'mentor' } });
     
     expect(emailInput.value).toBe('test@example.com');
-    expect(passwordInput.value).toBe('password123');
+    expect(passwordInput.value).toBe('TestPassword123!');
     expect(nameInput.value).toBe('Test User');
     expect(roleSelect.value).toBe('mentor');
   });

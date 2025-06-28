@@ -22,6 +22,10 @@ cd backend && npm install && npm start & cd ../frontend && npm install && npm st
 - 백엔드: `npm install && npm start &`
 - 프론트엔드: `npm install && npm start &`
 
+**제출용 API 정보:**
+- Swagger UI: `swagger-ui` (상대 경로)
+- OpenAPI 문서: `openapi.json` (상대 경로)
+
 ### 1. 백엔드 실행
 
 ```bash

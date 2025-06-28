@@ -46,10 +46,10 @@ describe('Login Component', () => {
     const passwordInput = screen.getByLabelText('비밀번호');
     
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+    fireEvent.change(passwordInput, { target: { value: 'TestPassword123!' } });
     
     expect(emailInput.value).toBe('test@example.com');
-    expect(passwordInput.value).toBe('password123');
+    expect(passwordInput.value).toBe('TestPassword123!');
   });
 
   test('shows signup link', () => {
