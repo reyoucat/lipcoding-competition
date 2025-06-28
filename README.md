@@ -1,65 +1,128 @@
-# 천하제일 입코딩 대회 2025
+# 멘토-멘티 매칭 앱
 
-<div>
-  <p><img src="./images/hero.png" width="500" alt="천하제일입코딩대회 이미지"></p>
-  <p style="font-size: 16pt; font-weight: bold;"><strong>제 1회 천하제일 입코딩대회에 오신 것을 환영합니다!</strong></p>
-</div>
+이 애플리케이션은 멘토와 멘티를 매칭해주는 웹 애플리케이션입니다.
 
-## 행사 정보
+## 프로젝트 구조
 
-자세한 행사 정보는 [https://lipcoding.kr](https://lipcoding.kr) 페이지를 참고하세요.
+```
+application/
+├── backend/          # Node.js + Express 백엔드 API
+└── frontend/         # React 프론트엔드
+```
 
-## 대회 방식
+## 실행 방법
 
-- 제한시간: 3시간
-- 사용 도구: VS Code + GitHub Copilot 보이스 코딩
-- 기술 스택: 웹 앱
-- 사용 언어: Python 3.12, JavaScript (node.js LTS 22.x), Java 21, .NET 9 중 선택
-- 데이터베이스: 메모리 DB 또는 SQLite
+### 1. 백엔드 실행
 
-## 시간 계획
+```bash
+cd application/backend
+npm install
+npm start &
+```
 
-| 시간          | 내용                              |
-|---------------|-----------------------------------|
-| 12:00 - 12:30 | 체크인                            |
-| 12:30 - 12:35 | 오프닝                            |
-| 12:35 - 13:05 | 오프닝 키노트                     |
-| 13:05 - 13:20 | GitHub Copilot 사용법 안내        |
-| 13:20 - 13:30 | 행사 진행 안내                    |
-| 13:30 - 14:00 | 입코딩 전 사전 준비 (키보드 허용) |
-| 14:00 - 17:00 | 입코딩                            |
-| 17:00 - 17:30 | 본선 진출자 투표                  |
-| 17:30 - 18:00 | 시상 및 클로징                    |
+백엔드는 `http://localhost:8080`에서 실행됩니다.
+- Swagger UI: `http://localhost:8080/swagger-ui`
+- OpenAPI JSON: `http://localhost:8080/openapi.json`
 
-## 대회 규칙
+### 2. 프론트엔드 실행
 
-- [GitHub Copilot 사용법](./ghcp.md)
-- [입코딩 규칙](./policy-rules.md)
-- [페널티 규정](./policy-penalties.md)
+새 터미널에서:
 
-## 도전 과제
+```bash
+cd application/frontend
+npm install
+npm start &
+```
 
-**웹 기반 멘토-멘티 매칭 앱 만들기**
+프론트엔드는 `http://localhost:3000`에서 실행됩니다.
 
-- [요구사항](./mentor-mentee-app-requirements.md)
-- [사용자 스토리](./mentor-mentee-app-user-stories.md)
-- [API 명세](./mentor-mentee-api-spec.md)
-- [OpenAPI 문서](./openapi.yaml)
-- [평가 방식](./mentor-mentee-app-assessment.md)
+## 기능
 
-## 앱 제출
+### 공통 기능
+- 회원가입 및 로그인 (JWT 인증)
+- 프로필 관리 (이름, 소개, 프로필 이미지)
 
-<div style="font-size: 16pt; font-weight: bold;"><strong>앱 제출 마감 기한: 2025년 6월 28일 17시</strong></div>
+### 멘토 기능
+- 기술 스택 등록
+- 받은 매칭 요청 확인
+- 요청 수락/거절
 
-<div>
-  <br><a href="../../issues"><img src="images/submit.png" width="150" alt="앱 제출" /></a><br><br>
-</div>
+### 멘티 기능
+- 멘토 목록 조회 및 검색
+- 멘토에게 매칭 요청 전송
+- 보낸 요청 상태 확인 및 삭제
 
-앱 개발을 마친 참가자는 [![앱제출](https://img.shields.io/badge/%EC%95%B1%20%EC%A0%9C%EC%B6%9C-2D8655)](../../issues)을 클릭해서 자신이 완성한 앱의 리포지토리와 관련 정보를 등록합니다. 이후 GitHub Actions 워크플로우를 통해 이슈에 등록한 내용을 바탕으로 평가를 진행합니다.
+## 기술 스택
 
-> **참고**: 이 때 최종 제출 시각을 넘겨서 제출한 참가자는 자동으로 탈락합니다. 최종 제출 시각은 **2025년 6월 28일 17시**입니다.
+### 백엔드
+- Node.js + Express
+- SQLite (로컬 파일 기반)
+- JWT 인증
+- Swagger/OpenAPI 문서화
+- Multer (파일 업로드)
+- 보안: Helmet, CORS, Rate Limiting
 
-## 본선 진출자 명단
+### 프론트엔드
+- React 18
+- React Router (라우팅)
+- Axios (HTTP 클라이언트)
+- Context API (상태 관리)
 
-| 이름 | GitHub ID | 리포지토리 주소 | 동영상 주소 | 제출 시각 |
-|------|-----------|-----------------|-------------|-----------|
+## API 엔드포인트
+
+### 인증
+- `POST /api/signup` - 회원가입
+- `POST /api/login` - 로그인
+
+### 사용자
+- `GET /api/me` - 내 정보 조회
+- `PUT /api/me` - 프로필 업데이트
+- `POST /api/me/image` - 프로필 이미지 업로드
+- `GET /api/images/:role/:id` - 프로필 이미지 조회
+
+### 멘토
+- `GET /api/mentors` - 멘토 목록 조회 (멘티만)
+
+### 매칭
+- `POST /api/matching-requests` - 매칭 요청 생성 (멘티만)
+- `GET /api/matching-requests` - 매칭 요청 목록
+- `PUT /api/matching-requests/:id` - 요청 수락/거절 (멘토만)
+- `DELETE /api/matching-requests/:id` - 요청 삭제 (멘티만)
+
+## 데이터베이스
+
+SQLite를 사용하며, 애플리케이션 시작 시 자동으로 테이블이 생성됩니다.
+
+### 테이블 구조
+
+#### users
+- 멘토와 멘티 모두 저장
+- 프로필 이미지는 BLOB로 저장
+- 멘토의 기술 스택은 JSON 문자열로 저장
+
+#### matching_requests
+- 매칭 요청 정보 저장
+- 상태: pending, accepted, rejected
+
+## 보안 기능
+
+- JWT 토큰 기반 인증 (1시간 유효)
+- 비밀번호 해싱 (bcrypt)
+- SQL 인젝션 방지
+- XSS 방지 (Helmet)
+- Rate Limiting
+- 파일 업로드 검증 (크기, 형식)
+
+## 개발 모드
+
+개발 모드로 실행하려면:
+
+```bash
+# 백엔드
+cd application/backend
+npm run dev &
+
+# 프론트엔드
+cd application/frontend
+npm start &
+```
